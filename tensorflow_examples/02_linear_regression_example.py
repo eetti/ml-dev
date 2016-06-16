@@ -4,14 +4,15 @@ import tensorflow as tf
 import numpy as np 
 
 train_X = np.linspace(-1, 1, 101)
-train_Y = 2 * train_X + np.random.randn(*train_X.shape) * 0.33
+train_Y = 2 * train_X + np.random.randn(*train_X.shape) * 0.33 + 10
 
 X = tf.placeholder("float")
 Y = tf.placeholder("float")
 
 w = tf.Variable(0.0, name="weight")
+b = tf.Variable(0.0, name="reminder")
 
-cost_op = tf.square(Y - tf.mul(X, w))
+cost_op = tf.square(Y - tf.mul(X, w) - b)
 
 train_op = tf.train.GradientDescentOptimizer(0.01).minimize(cost_op)
 
@@ -23,3 +24,4 @@ with tf.Session() as sess:
   	  sess.run(train_op, feed_dict={X: x, Y: y})
 
   print(sess.run(w))
+  print(sess.run(b))
