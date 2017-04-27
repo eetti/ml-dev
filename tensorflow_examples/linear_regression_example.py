@@ -17,7 +17,7 @@ cost_op = tf.square(Y - tf.mul(X, w) - b)
 train_op = tf.train.GradientDescentOptimizer(0.01).minimize(cost_op)
 
 with tf.Session() as sess:
-  tf.initialize_all_variables().run()
+  sess.run(initialize_all_variables())
 
   for i in range(10):
   	for (x, y) in zip(train_X, train_Y):
